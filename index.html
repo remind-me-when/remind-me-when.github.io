@@ -105,40 +105,43 @@ section { padding: 96px 0; }
 
 .triggers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
 .trigger { background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 22px 22px 24px; display: flex; flex-direction: column; }
-.trigger .scene { width: 100%; height: auto; aspect-ratio: 2 / 1; display: block; border-radius: 18px; background: var(--land); margin-bottom: 20px; }
+.trigger .scene { position: relative; overflow: hidden; width: 100%; aspect-ratio: 2 / 1; border-radius: 18px; background: var(--land); margin-bottom: 20px; }
+.trigger .scene svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .trigger h3 { font-size: 21px; display: flex; align-items: center; gap: 10px; }
 .trigger p { color: var(--ink-2); font-size: 16px; margin: 10px 0 18px; flex: 1; }
 .example { border-top: 1px solid var(--line); padding-top: 14px; font-size: 15px; }
 .example b { display: block; }
 .example span { color: var(--cobalt); }
 
-/* Сцены карточек — играют, пока карточка на экране */
-.scene * { transform-box: fill-box; transform-origin: center; }
+/* Сцены карточек — играют, пока карточка на экране.
+   Подвижное — отдельные слои <svg class="layer"> поверх неподвижного фона: их двигает видеокарта
+   (transform/opacity у HTML-слоя), а не перерисовка SVG на каждом кадре — иначе Safari на iPhone дёргается. */
+.scene .layer { will-change: transform, opacity; }
 .scene .stroke { fill: none; stroke: var(--cobalt); stroke-width: 1.6; }
 .scene .soft { fill: var(--tint); stroke: var(--cobalt); stroke-width: 1.4; }
 .scene .faint { fill: none; stroke: var(--cobalt); stroke-opacity: .25; stroke-width: 1.2; }
 .scene .me { fill: var(--ink); stroke: var(--card); stroke-width: 3; }
 .scene .pal { fill: var(--cobalt); stroke: var(--card); stroke-width: 3; }
-.scene .hit { fill: none; stroke: var(--signal); stroke-width: 2.5; opacity: 0; }
-.scene .chip { fill: var(--signal); opacity: 0; }
-.scene .chip-t { fill: #fff; font: 600 13px Onest, sans-serif; text-anchor: middle; dominant-baseline: central; opacity: 0; }
+.scene .ring { fill: none; stroke: var(--signal); stroke-width: 2.5; }
+.scene .chip-r { fill: var(--signal); }
+.scene .layer.hit, .scene .layer.chip { opacity: 0; }
+.scene .chip-t { fill: #fff; font: 600 13px Onest, sans-serif; text-anchor: middle; dominant-baseline: central; }
 .scene .road { stroke: var(--road); stroke-width: 10; stroke-linecap: round; fill: none; }
 .scene .hand { stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; }
-.scene .hand.m { transform-origin: 60px 60px; transform-box: view-box; }
 .scene .hand.h { transform-origin: 60px 60px; transform-box: view-box; transform: rotate(-90deg); }
 .scene .tick { stroke: var(--ink-3); stroke-width: 1.6; stroke-linecap: round; }
 .play .walk { animation: walk 4.8s cubic-bezier(.45,0,.25,1) infinite; }
 .play .hit { animation: hit 4.8s ease-out infinite; }
-.play .hand.m { animation: spin 4.8s cubic-bezier(.5,0,.2,1) infinite; }
-.play .chip, .play .chip-t { animation: chip 4.8s ease infinite; }
+.play .spin { animation: spin 4.8s cubic-bezier(.5,0,.2,1) infinite; }
+.play .chip { animation: chip 4.8s ease infinite; }
 .play .meet-a { animation: meetA 4.8s cubic-bezier(.45,0,.25,1) infinite; }
 .play .meet-b { animation: meetB 4.8s cubic-bezier(.45,0,.25,1) infinite; }
-@keyframes walk { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 52%, 88% { transform: translateX(124px); opacity: 1; } 100% { transform: translateX(124px); opacity: 0; } }
+@keyframes walk { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 52%, 88% { transform: translateX(51.667%); opacity: 1; } 100% { transform: translateX(51.667%); opacity: 0; } }
 @keyframes hit { 0%, 50% { opacity: 0; transform: scale(1); } 56% { opacity: 1; } 84%, 100% { opacity: 0; transform: scale(1.7); } }
 @keyframes spin { 0% { transform: rotate(0); } 55%, 100% { transform: rotate(1080deg); } }
-@keyframes chip { 0%, 52% { opacity: 0; transform: translateY(6px); } 60%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-@keyframes meetA { 0% { transform: translateX(0); } 52%, 88% { transform: translateX(58px); } 100% { transform: translateX(58px); opacity: 0; } }
-@keyframes meetB { 0% { transform: translateX(0); } 52%, 88% { transform: translateX(-58px); } 100% { transform: translateX(-58px); opacity: 0; } }
+@keyframes chip { 0%, 52% { opacity: 0; transform: translateY(5%); } 60%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes meetA { 0% { transform: translateX(0); } 52%, 88% { transform: translateX(24.167%); } 100% { transform: translateX(24.167%); opacity: 0; } }
+@keyframes meetB { 0% { transform: translateX(0); } 52%, 88% { transform: translateX(-24.167%); } 100% { transform: translateX(-24.167%); opacity: 0; } }
 
 /* Сцена на карте */
 .story { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
@@ -217,9 +220,9 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .js .hero h1 .w, .js .hero .lead, .js .hero .cta, .js .more > div { animation: none; opacity: 1; transform: none; transition: none; }
-  .play .walk, .play .hit, .play .hand.m, .play .chip, .play .chip-t, .play .meet-a, .play .meet-b, .private.play .radar .wave { animation: none; }
-  .scene .walk { transform: translateX(124px); } .scene .meet-a { transform: translateX(58px); } .scene .meet-b { transform: translateX(-58px); }
-  .scene .chip, .scene .chip-t { opacity: 1; }
+  .play .walk, .play .hit, .play .spin, .play .chip, .play .meet-a, .play .meet-b, .private.play .radar .wave { animation: none; }
+  .scene .walk { transform: translateX(51.667%); } .scene .meet-a { transform: translateX(24.167%); } .scene .meet-b { transform: translateX(-24.167%); }
+  .scene .layer.chip { opacity: 1; }
   .push { transition: none; }
 }
 </style>
@@ -271,39 +274,42 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
     <p class="sub" data-i="sub2a">Выберите, что должно случиться: вы пришли в место, наступило время или рядом оказался друг. Дальше RMW следит сам, даже когда приложение закрыто.</p>
     <div class="triggers">
       <div class="trigger">
-        <svg class="scene" viewBox="0 0 240 120" aria-hidden="true">
-          <path class="road" d="M0 84 H240"/>
-          <circle class="faint" cx="168" cy="60" r="50"/>
-          <circle class="soft" cx="168" cy="60" r="32"/>
-          <circle class="hit" cx="168" cy="60" r="32"/>
-          <circle class="pal" cx="168" cy="60" r="5" style="stroke:none"/>
-          <circle class="me walk" cx="34" cy="70" r="8"/>
-        </svg>
+        <div class="scene" aria-hidden="true">
+          <svg viewBox="0 0 240 120" aria-hidden="true">
+            <path class="road" d="M0 84 H240"/>
+            <circle class="faint" cx="168" cy="60" r="50"/>
+            <circle class="soft" cx="168" cy="60" r="32"/>
+            <circle class="pal" cx="168" cy="60" r="5" style="stroke:none"/>
+          </svg>
+          <svg class="layer hit" style="transform-origin:70% 50%" viewBox="0 0 240 120" aria-hidden="true"><circle class="ring" cx="168" cy="60" r="32"/></svg>
+          <svg class="layer walk" viewBox="0 0 240 120" aria-hidden="true"><circle class="me" cx="34" cy="70" r="8"/></svg>
+        </div>
         <h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="9.5"/></svg><span data-i="tPlace">Место</span></h3>
         <p data-i="tPlaceD">Дом, работа, магазин, спортзал. Напомнит, когда придёте или когда уйдёте.</p>
         <div class="example"><b data-i="tPlaceE">Полить цветы</b><span data-i="tPlaceW">когда приду домой</span></div>
       </div>
       <div class="trigger">
-        <svg class="scene" viewBox="0 0 240 120" aria-hidden="true">
-          <circle class="soft" cx="60" cy="60" r="40"/>
-          <path class="tick" d="M60 26v6M60 88v6M26 60h6M88 60h6"/>
-          <line class="hand h" x1="60" y1="60" x2="60" y2="38"/>
-          <line class="hand m" x1="60" y1="60" x2="60" y2="30"/>
-          <circle cx="60" cy="60" r="3.5" style="fill:var(--ink)"/>
-          <rect class="chip" x="128" y="44" width="84" height="32" rx="16"/>
-          <text class="chip-t" x="170" y="60">9:00</text>
-        </svg>
+        <div class="scene" aria-hidden="true">
+          <svg viewBox="0 0 240 120" aria-hidden="true">
+            <circle class="soft" cx="60" cy="60" r="40"/>
+            <path class="tick" d="M60 26v6M60 88v6M26 60h6M88 60h6"/>
+            <line class="hand h" x1="60" y1="60" x2="60" y2="38"/>
+          </svg>
+          <svg class="layer spin" style="transform-origin:25% 50%" viewBox="0 0 240 120" aria-hidden="true"><line class="hand" x1="60" y1="60" x2="60" y2="30"/></svg>
+          <svg class="layer" viewBox="0 0 240 120" aria-hidden="true"><circle cx="60" cy="60" r="3.5" style="fill:var(--ink)"/></svg>
+          <svg class="layer chip" viewBox="0 0 240 120" aria-hidden="true"><rect class="chip-r" x="128" y="44" width="84" height="32" rx="16"/><text class="chip-t" x="170" y="60">9:00</text></svg>
+        </div>
         <h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span data-i="tTime">Время</span></h3>
         <p data-i="tTimeD">Разово или по расписанию: каждый день, по будням, раз в месяц. Плюс дни рождения и важные даты.</p>
         <div class="example"><b data-i="tTimeE">Выпить таблетку</b><span data-i="tTimeW">каждый день в 9:00</span></div>
       </div>
       <div class="trigger">
-        <svg class="scene" viewBox="0 0 240 120" aria-hidden="true">
-          <path class="road" d="M0 60 H240"/>
-          <circle class="hit" cx="120" cy="60" r="30"/>
-          <circle class="me meet-a" cx="44" cy="60" r="8"/>
-          <circle class="pal meet-b" cx="196" cy="60" r="8"/>
-        </svg>
+        <div class="scene" aria-hidden="true">
+          <svg viewBox="0 0 240 120" aria-hidden="true"><path class="road" d="M0 60 H240"/></svg>
+          <svg class="layer hit" viewBox="0 0 240 120" aria-hidden="true"><circle class="ring" cx="120" cy="60" r="30"/></svg>
+          <svg class="layer meet-a" viewBox="0 0 240 120" aria-hidden="true"><circle class="me" cx="44" cy="60" r="8"/></svg>
+          <svg class="layer meet-b" viewBox="0 0 240 120" aria-hidden="true"><circle class="pal" cx="196" cy="60" r="8"/></svg>
+        </div>
         <h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8.5" cy="9" r="3"/><circle cx="16.5" cy="9" r="3"/><path d="M3 20c0-3 2.5-5.5 5.5-5.5S14 17 14 20M14.5 16c.7-1 1.9-1.5 3-1.5 2.4 0 4.5 2.2 4.5 5.5"/></svg><span data-i="tFriend">Друг рядом</span></h3>
         <p data-i="tFriendD">Напомнит, когда друг окажется поблизости. Только с теми, кто сам согласился делиться местом.</p>
         <div class="example"><b data-i="tFriendE">Вернуть Лёше книгу</b><span data-i="tFriendW">когда Лёша рядом</span></div>
