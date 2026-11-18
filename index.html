@@ -130,18 +130,22 @@ section { padding: 96px 0; }
 .scene .hand { stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; }
 .scene .hand.h { transform-origin: 60px 60px; transform-box: view-box; transform: rotate(-90deg); }
 .scene .tick { stroke: var(--ink-3); stroke-width: 1.6; stroke-linecap: round; }
-.play .walk { animation: walk 4.8s cubic-bezier(.45,0,.25,1) infinite; }
-.play .hit { animation: hit 4.8s ease-out infinite; }
-.play .spin { animation: spin 4.8s cubic-bezier(.5,0,.2,1) infinite; }
-.play .chip { animation: chip 4.8s ease infinite; }
-.play .meet-a { animation: meetA 4.8s cubic-bezier(.45,0,.25,1) infinite; }
-.play .meet-b { animation: meetB 4.8s cubic-bezier(.45,0,.25,1) infinite; }
-@keyframes walk { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 52%, 88% { transform: translateX(51.667%); opacity: 1; } 100% { transform: translateX(51.667%); opacity: 0; } }
-@keyframes hit { 0%, 50% { opacity: 0; transform: scale(1); } 56% { opacity: 1; } 84%, 100% { opacity: 0; transform: scale(1.7); } }
+/* Анимация стоит на паузе в первом кадре (шары невидимы) и идёт, пока карточка на экране.
+   Ушла с экрана — пауза, вернулась — продолжает с того же места, без сброса и рывков. */
+.scene .walk { animation: walk 4.8s cubic-bezier(.45,0,.25,1) infinite; }
+.scene .hit { animation: hit 4.8s ease-out infinite; }
+.scene .spin { animation: spin 4.8s cubic-bezier(.5,0,.2,1) infinite; }
+.scene .chip { animation: chip 4.8s ease infinite; }
+.scene .meet-a { animation: meetA 4.8s cubic-bezier(.45,0,.25,1) infinite; }
+.scene .meet-b { animation: meetB 4.8s cubic-bezier(.45,0,.25,1) infinite; }
+.scene .layer { animation-play-state: paused; }
+.play .scene .layer { animation-play-state: running; }
+@keyframes walk { 0% { transform: translateX(0); opacity: 0; } 16% { opacity: 1; } 52%, 88% { transform: translateX(51.667%); opacity: 1; } 100% { transform: translateX(51.667%); opacity: 0; } }
+@keyframes hit { 0%, 50% { opacity: 0; transform: scale(1); } 60% { opacity: 1; } 84%, 100% { opacity: 0; transform: scale(1.7); } }
 @keyframes spin { 0% { transform: rotate(0); } 55%, 100% { transform: rotate(1080deg); } }
 @keyframes chip { 0%, 52% { opacity: 0; transform: translateY(5%); } 60%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-@keyframes meetA { 0% { transform: translateX(0); } 52%, 88% { transform: translateX(24.167%); } 100% { transform: translateX(24.167%); opacity: 0; } }
-@keyframes meetB { 0% { transform: translateX(0); } 52%, 88% { transform: translateX(-24.167%); } 100% { transform: translateX(-24.167%); opacity: 0; } }
+@keyframes meetA { 0% { transform: translateX(0); opacity: 0; } 16% { opacity: 1; } 52%, 88% { transform: translateX(24.167%); } 100% { transform: translateX(24.167%); opacity: 0; } }
+@keyframes meetB { 0% { transform: translateX(0); opacity: 0; } 16% { opacity: 1; } 52%, 88% { transform: translateX(-24.167%); } 100% { transform: translateX(-24.167%); opacity: 0; } }
 
 /* Сцена на карте */
 .story { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
@@ -220,7 +224,7 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .js .hero h1 .w, .js .hero .lead, .js .hero .cta, .js .more > div { animation: none; opacity: 1; transform: none; transition: none; }
-  .play .walk, .play .hit, .play .spin, .play .chip, .play .meet-a, .play .meet-b, .private.play .radar .wave { animation: none; }
+  .scene .layer, .private.play .radar .wave { animation: none; }
   .scene .walk { transform: translateX(51.667%); } .scene .meet-a { transform: translateX(24.167%); } .scene .meet-b { transform: translateX(-24.167%); }
   .scene .layer.chip { opacity: 1; }
   .push { transition: none; }
