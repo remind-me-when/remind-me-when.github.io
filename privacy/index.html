@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>RMW — Privacy Policy</title>
-<meta name="description" content="RMW privacy policy: places, reminders, chats and lists are end-to-end encrypted on your iPhone.">
+<meta name="description" content="RMW privacy policy: places, reminders, chats and lists are encrypted on your iPhone before they reach our server.">
 <meta name="theme-color" content="#ECEFF5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1115" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="../favicon.png">
@@ -129,12 +129,12 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
 <article id="en" data-lang="en" lang="en">
   <h1>Privacy Policy</h1>
   <p class="lead">RMW (“Remind Me When”, “we”) is an iPhone app for reminders that fire at a place or a time, with friends, chat, calls and shared lists. This policy explains what data we process and why.</p>
-  <p class="date">Last updated: 19 November 2026</p>
+  <p class="date">Last updated: 24 November 2026</p>
 
   <div class="band">
     <svg class="rings" viewBox="0 0 420 420" aria-hidden="true"><circle cx="210" cy="210" r="50" stroke-width="2"/><circle cx="210" cy="210" r="100" stroke-opacity=".7"/><circle cx="210" cy="210" r="150" stroke-opacity=".45"/><circle cx="210" cy="210" r="205" stroke-opacity=".25"/><circle class="dot" cx="210" cy="210" r="9"/></svg>
-    <h2>End-to-end encryption</h2>
-    <p>Your places, reminders, dates, chats and shared lists are encrypted on your iPhone before they are sent to our server. The keys stay on your devices (and with the friends you share with), so we store this content only in encrypted form and cannot read it. The key moves to a new iPhone with an encrypted iCloud or computer backup. If you lose all your devices without such a backup, we cannot restore this content.</p>
+    <h2>Encryption</h2>
+    <p>Your places, reminders, dates, chats and shared lists are encrypted on your iPhone before they are sent to our server, so the database stores this content only in encrypted form. So that you can sign in on a new iPhone and get your data back, our server also keeps a copy of your encryption key, itself encrypted with a separate server secret that is not stored in the database. A database leak alone therefore does not reveal your content, but technically our server could decrypt it. We do not do this: the copy is used only by the server function that returns the key to you after you sign in. If you use RMW without an account, none of this is sent to the server.</p>
   </div>
 
   <ul class="facts">
@@ -145,7 +145,8 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
 
   <h2 class="sec">What our server can see</h2>
   <dl class="rows">
-    <div><dt>Account</dt><dd>Your email address (used to sign in with a one-time code).</dd></div>
+    <div><dt>Without an account</dt><dd>You can use RMW without signing in. Your places, reminders and lists then stay only on your iPhone and are not sent to our server. Friends, chat and sync need an account.</dd></div>
+    <div><dt>Account</dt><dd>Your email address (used to sign in with a one-time code) or, if you choose <b>Sign in with Apple</b>, the account identifier Apple gives us and the email Apple shares (a private relay address if you choose “Hide My Email”). We never receive your Apple ID password.</dd></div>
     <div><dt>Profile</dt><dd>The name, @nickname, profile photo and “about me” text you enter. Friends and people who know your exact @nickname can see them.</dd></div>
     <div><dt>Friends</dt><dd>Who you are friends with and friend requests.</dd></div>
     <div><dt>Service data</dt><dd>Technical details needed to sync and deliver things: record IDs, timestamps, which friend a message or shared list belongs to, and your push-notification token.</dd></div>
@@ -158,7 +159,7 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
   <dl class="rows">
     <div><dt>Supabase</dt><dd>Database, sign-in, file storage and server functions, hosted in the EU.</dd></div>
     <div><dt>Brevo</dt><dd>Sends the sign-in code to your email.</dd></div>
-    <div><dt>Apple and Expo</dt><dd>Deliver push notifications. Apple also provides the App Store and maps.</dd></div>
+    <div><dt>Apple and Expo</dt><dd>Deliver push notifications. Apple also provides the App Store, maps and Sign in with Apple.</dd></div>
     <div><dt>Speech recognition</dt><dd>When you dictate, iOS speech recognition turns your voice into text. Apple may process the audio on its servers to do this, under Apple’s privacy policy; without internet it is recognized on your iPhone. RMW does not store or receive the audio, only the resulting text.</dd></div>
     <div><dt>Voice and text assistant</dt><dd>If you agree in the app, the phrase you type or say, the names of your places, friends’ names and list names are sent to our server and to Groq (an AI service) to turn it into a reminder. Nothing is stored or used for training; notes and addresses are not sent. Without your consent the phrase is understood on your iPhone by Apple Intelligence or simple built-in rules and is not sent anywhere.</dd></div>
     <div><dt>Address search</dt><dd>When you search for a place, the search text and your approximate position are sent to OpenStreetMap-based search (Photon, Nominatim) or Apple’s search. The text of your reminder is not sent.</dd></div>
@@ -176,12 +177,12 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
 <article id="ru" data-lang="ru" lang="ru">
   <h1>Политика конфиденциальности</h1>
   <p class="lead">RMW («Remind Me When», «мы») — приложение для iPhone: напоминания по месту и времени, друзья, чат, звонки и общие списки. Здесь — какие данные мы обрабатываем и зачем.</p>
-  <p class="date">Обновлено 19 ноября 2026</p>
+  <p class="date">Обновлено 24 ноября 2026</p>
 
   <div class="band">
     <svg class="rings" viewBox="0 0 420 420" aria-hidden="true"><circle cx="210" cy="210" r="50" stroke-width="2"/><circle cx="210" cy="210" r="100" stroke-opacity=".7"/><circle cx="210" cy="210" r="150" stroke-opacity=".45"/><circle cx="210" cy="210" r="205" stroke-opacity=".25"/><circle class="dot" cx="210" cy="210" r="9"/></svg>
-    <h2>Сквозное шифрование</h2>
-    <p>Места, напоминания, даты, чаты и общие списки шифруются на iPhone до отправки на сервер. Ключи остаются на ваших устройствах (и у друзей, с которыми вы делитесь), поэтому мы храним эти данные только в зашифрованном виде и прочитать их не можем. Ключ переезжает на новый iPhone вместе с зашифрованной копией iCloud или компьютера. Если вы потеряете все устройства без такой копии, восстановить данные мы не сможем.</p>
+    <h2>Шифрование</h2>
+    <p>Места, напоминания, даты, чаты и общие списки шифруются на iPhone до отправки на сервер, поэтому в базе они хранятся только в зашифрованном виде. Чтобы вы могли войти на новом iPhone и получить данные обратно, сервер хранит и копию вашего ключа шифрования — она сама зашифрована отдельным секретом сервера, который в базе не лежит. Поэтому утечка одной только базы ваших данных не раскроет, но технически наш сервер мог бы их расшифровать. Мы этого не делаем: копией пользуется только функция, которая после входа возвращает ключ вам. Если вы пользуетесь RMW без аккаунта, ничего из этого на сервер не уходит.</p>
   </div>
 
   <ul class="facts">
@@ -192,7 +193,8 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
 
   <h2 class="sec">Что видит наш сервер</h2>
   <dl class="rows">
-    <div><dt>Аккаунт</dt><dd>Почта (для входа по одноразовому коду).</dd></div>
+    <div><dt>Без аккаунта</dt><dd>RMW можно пользоваться без входа. Тогда места, напоминания и списки хранятся только на iPhone и на наш сервер не уходят. Для друзей, чата и синхронизации нужен аккаунт.</dd></div>
+    <div><dt>Аккаунт</dt><dd>Почта (для входа по одноразовому коду) или, если вы выбрали <b>вход через Apple</b>, идентификатор аккаунта от Apple и почта, которую передаёт Apple (скрытый адрес, если вы выбрали «Скрыть e-mail»). Пароль Apple ID мы не получаем.</dd></div>
     <div><dt>Профиль</dt><dd>Имя, @ник, фото и «о себе», которые вы указали. Их видят друзья и те, кто знает ваш точный @ник.</dd></div>
     <div><dt>Друзья</dt><dd>С кем вы дружите, заявки в друзья.</dd></div>
     <div><dt>Служебные данные</dt><dd>То, что нужно для синхронизации и доставки: идентификаторы записей, время, к какому другу относится сообщение или общий список, токен push-уведомлений.</dd></div>
@@ -205,7 +207,7 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
   <dl class="rows">
     <div><dt>Supabase</dt><dd>База данных, вход, хранение файлов и серверные функции, серверы в ЕС.</dd></div>
     <div><dt>Brevo</dt><dd>Отправляет код для входа на почту.</dd></div>
-    <div><dt>Apple и Expo</dt><dd>Доставляют push-уведомления. Apple также — App Store и карты.</dd></div>
+    <div><dt>Apple и Expo</dt><dd>Доставляют push-уведомления. Apple также — App Store, карты и вход через Apple.</dd></div>
     <div><dt>Распознавание речи</dt><dd>Когда вы диктуете, голос в текст превращает распознавание речи iOS. Для этого Apple может обрабатывать запись на своих серверах — по политике конфиденциальности Apple; без интернета речь распознаётся на iPhone. RMW запись не получает и не хранит — только готовый текст.</dd></div>
     <div><dt>Голосовой и текстовый помощник</dt><dd>Если вы согласились в приложении, фраза, которую вы написали или сказали, названия ваших мест, имена друзей и названия списков отправляются на наш сервер и в Groq (сервис ИИ), чтобы превратить её в напоминание. Ничего не хранится и не используется для обучения; заметки и адреса не отправляются. Без согласия фраза разбирается на iPhone — Apple Intelligence или простыми правилами — и никуда не уходит.</dd></div>
     <div><dt>Поиск адресов</dt><dd>Когда вы ищете место, текст запроса и примерная позиция уходят в поиск на основе OpenStreetMap (Photon, Nominatim) или в поиск Apple. Текст напоминания туда не уходит.</dd></div>
@@ -223,12 +225,12 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
 <article id="lt" data-lang="lt" lang="lt">
   <h1>Privatumo politika</h1>
   <p class="lead">RMW („Remind Me When“, „mes“) – „iPhone“ programėlė priminimams pagal vietą ir laiką, su draugais, pokalbiais, skambučiais ir bendrais sąrašais.</p>
-  <p class="date">Atnaujinta 2026 m. lapkričio 19 d.</p>
+  <p class="date">Atnaujinta 2026 m. lapkričio 24 d.</p>
 
   <div class="band">
     <svg class="rings" viewBox="0 0 420 420" aria-hidden="true"><circle cx="210" cy="210" r="50" stroke-width="2"/><circle cx="210" cy="210" r="100" stroke-opacity=".7"/><circle cx="210" cy="210" r="150" stroke-opacity=".45"/><circle cx="210" cy="210" r="205" stroke-opacity=".25"/><circle class="dot" cx="210" cy="210" r="9"/></svg>
-    <h2>Ištisinis šifravimas</h2>
-    <p>Vietos, priminimai, datos, pokalbiai ir bendri sąrašai užšifruojami jūsų „iPhone“ prieš siunčiant į serverį. Raktai lieka jūsų įrenginiuose (ir pas draugus, su kuriais dalijatės), todėl šių duomenų perskaityti negalime. Raktas į naują „iPhone“ perkeliamas kartu su užšifruota „iCloud“ arba kompiuterio atsargine kopija. Praradę visus įrenginius be tokios kopijos, duomenų atkurti negalėsime.</p>
+    <h2>Šifravimas</h2>
+    <p>Vietos, priminimai, datos, pokalbiai ir bendri sąrašai užšifruojami jūsų „iPhone“ prieš siunčiant į serverį, todėl duomenų bazėje jie saugomi tik užšifruoti. Kad galėtumėte prisijungti naujame „iPhone“, serveris taip pat saugo jūsų rakto kopiją, užšifruotą atskira serverio paslaptimi, kuri nelaikoma duomenų bazėje. Vien duomenų bazės nutekėjimas jūsų duomenų neatskleistų, tačiau techniškai mūsų serveris galėtų juos iššifruoti. Mes to nedarome. Naudojant RMW be paskyros, niekas iš to į serverį nesiunčiama.</p>
   </div>
 
   <ul class="facts">
@@ -239,7 +241,8 @@ footer a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
 
   <h2 class="sec">Ką mato mūsų serveris</h2>
   <dl class="rows">
-    <div><dt>Paskyra</dt><dd>El. paštas (prisijungimui vienkartiniu kodu).</dd></div>
+    <div><dt>Be paskyros</dt><dd>RMW galima naudoti neprisijungus. Tada vietos, priminimai ir sąrašai lieka tik „iPhone“ ir į mūsų serverį nesiunčiami. Draugams, pokalbiams ir sinchronizacijai reikia paskyros.</dd></div>
+    <div><dt>Paskyra</dt><dd>El. paštas (prisijungimui vienkartiniu kodu) arba, jei renkatės „Sign in with Apple“, Apple suteiktas paskyros identifikatorius ir Apple perduotas el. paštas (gali būti paslėptas adresas). Apple ID slaptažodžio negauname.</dd></div>
     <div><dt>Profilis</dt><dd>Vardas, @slapyvardis, nuotrauka ir „apie mane“. Juos mato draugai ir tie, kas žino tikslų jūsų @slapyvardį.</dd></div>
     <div><dt>Draugai</dt><dd>Su kuo draugaujate, kvietimai.</dd></div>
     <div><dt>Tarnybiniai duomenys</dt><dd>Įrašų ID, laikas, kuriam draugui priklauso žinutė ar sąrašas, pranešimų žetonas.</dd></div>
